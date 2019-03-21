@@ -1,0 +1,171 @@
+import fullCalendar from "./fullcalendar.png";
+import calendar1 from "./calendar1.png";
+import calendar2 from "./calendar2.png";
+import calendar3 from "./calendar3.png";
+import calendar4 from "./calendar4.png";
+import styles from "./document.module.css";
+
+<div>
+<h1>How to integrate the Google Calendar API</h1>
+Today we're going to be using a JavaScript event calendar created by <a href="https://fullcalendar.io">FullCalendar</a>, and using the Google Calendar API, we 
+will be able to grab your calendar data and post it to your very own site.
+<br />
+<br />
+It will look something like this:
+
+<img src={fullCalendar} alt="FullCalendar" />
+
+First, <a href="https://fullcalendar.io/download">download</a> the zip file from FullCalendar's site.
+
+While that's downloading, create your index.html and css files.
+
+```html
+<!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="utf-8" />
+		<title>Calendar</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<link rel="manifest" href="site.webmanifest" />
+
+		<link rel="stylesheet" href="css/stylesheet.css" />
+	</head>
+	<body></body>
+</html>
+```
+
+After the zip is done downloading, unzip it into the directory where your index file is.
+We only need the folders that are in the packages directory.
+
+Next, add these scripts to the head of your index.html file:
+
+```html
+<link href="fullcalendar/core/main.css" rel="stylesheet" />
+<link href="fullcalendar/daygrid/main.css" rel="stylesheet" />
+<link href="fullcalendar/timegrid/main.css" rel="stylesheet" />
+<link href="fullcalendar/list/main.css" rel="stylesheet" />
+<script src="fullcalendar/core/main.js"></script>
+<script src="fullcalendar/daygrid/main.js"></script>
+<script src="fullcalendar/timegrid/main.js"></script>
+<script src="fullcalendar/list/main.js"></script>
+<script src="fullcalendar/interaction/main.js"></script>
+<script src="fullcalendar/google-calendar/main.js"></script>
+<script>
+	document.addEventListener("DOMContentLoaded", function() {
+		let calendarEl = document.getElementById("calendar");
+
+		let calendar = new FullCalendar.Calendar(calendarEl, {
+			plugins: ["dayGrid", "timeGrid", "list", "interaction", "googleCalendar"],
+			selectable: true
+		});
+
+		calendar.render();
+	});
+</script>
+```
+
+Here we are just loading in the scripts from the fullcalendar directory, and creating the variables 'calendarEl' and 'calendar' to use in our html.
+
+```jsx
+let calendarEl = document.getElementById("calendar");
+```
+
+This snippet will allow you to target a specific ID in your html in which to load the calendar into.
+
+```jsx
+let calendar = new FullCalendar.Calendar(calendarEl, {
+	plugins: ["dayGrid", "timeGrid", "list", "interaction", "googleCalendar"],
+	selectable: true
+});
+```
+
+And this bit is giving the parameters to FullCalendar, where 'plugins' are the functional parts you will be utilizing in the calendar, and 'selectable' allows you to hover and click on an object.
+
+```jsx
+calendar.render();
+```
+
+This is just rendering the calendar whenever the calendar variable is called; in this case it will be called by the calendarEl variable when it is rendered in the html.
+
+Let's load the calendar onto our page before going any further.
+
+Create a div just below your body tag and give it a class named 'container'.
+Then create another div inside of that div you just made and give it an ID of 'calendar'.
+
+```html
+<body>
+	<div class="container">
+		<div id="calendar"></div>
+	</div>
+</body>
+```
+
+It should look something like this:
+
+<img src={calendar1} alt="calendar 1" />
+
+Now that the foundation is set, it's time to enable your Google Calendar API. If you haven't already, you'll need to create a <a href="https://console.developers.google.com">developer account </a>.
+
+<h5>If you get lost, <a href="https://developers.google.com/calendar/quickstart/js#step_1_turn_on_the">here</a> is a complete guide on getting your API setup.
+</h5>
+
+Once you have that set up, follow <a href="https://console.developers.google.com/flows/enableapi?apiid=calendar">this wizard</a> to create a project.
+
+When you create the project, you'll need to create credentials for the API. In the left hand menu of of the API console, click on credentials, then create credentials, then API key.
+
+<img src={calendar2} alt="calendar 2" />
+
+Once created, you'll have an API key that looks like this:
+<h5>Note: I deleted this API key you see here, so no need to try and abuse it</h5>
+
+<img src={calendar3} alt="calendar 3" />
+
+Now that we have the API key, we need to make our <a href="https://calendar.google.com">Google Calendar</a> public. Go to the settings for your specific calendar, and under 'Access permissions' click the checkbox for 'Make available to public'.
+
+Also you will need to grab the Calendar ID, it will be under 'Integrate calendar' on the same page as where the 'Access permissions' section was located.
+
+<h2>On to the good part!</h2>
+It's time to give your calendar access to the Google Calendar API.
+
+With your API key copied, add it to this script in your index.html file:
+
+```jsx
+let calendar = new FullCalendar.Calendar(calendarEl, {
+	plugins: ["dayGrid", "timeGrid", "list", "interaction", "googleCalendar"],
+	selectable: true,
+	googleCalendarApiKey: "Your API key goes here",
+	events: {
+		googleCalendarId: "Your Calendar ID goes here"
+	}
+});
+```
+
+With that in place, you should have access to your events made in Google Calendar!
+
+I added a bit of styling to my calendar to liven it up a bit:
+
+```css
+body {
+	background: linear-gradient(to right, #3788d8, #dbedff);
+}
+
+.container {
+	background: linear-gradient(to right, #ff655a, #e55a51);
+	opacity: 0.9;
+	width: 75%;
+	height: auto;
+	margin: auto;
+	color: #fff;
+}
+
+#calendar {
+	font-family: "Raleway", sans-serif;
+}
+```
+
+<h2>The finished product:</h2>
+
+<img src={calendar4} alt="calendar 4" />
+
+</div>

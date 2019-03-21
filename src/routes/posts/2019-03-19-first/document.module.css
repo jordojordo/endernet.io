@@ -1,0 +1,9 @@
+.svg-1, .svg-2 {
+	position: relative;
+	margin: auto;
+	margin-bottom: 50px;
+}
+
+.svg-1 img {
+	border-radius: 10px;
+}

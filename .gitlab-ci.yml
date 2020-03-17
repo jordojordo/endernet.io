@@ -1,6 +1,6 @@
 deploy_dev:
   image: node:latest
-  stage: dev
+  stage: deploy_dev
   environment:
     name: dev
     url: https://dev-endernet-io.firebaseapp.com
@@ -14,7 +14,7 @@ deploy_dev:
 
 deploy_prod:
   image: node:latest
-  stage: prod
+  stage: deploy_prod
   environment:
     name: prod
     url: https://endernet-io.firebaseapp.com

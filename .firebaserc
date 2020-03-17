@@ -1,0 +1,17 @@
+{
+  "projects": {
+    "default": "endernet-blog"
+  },
+  "targets": {
+    "endernet-blog": {
+      "hosting": {
+        "dev": [
+          "dev-endernet-blog"
+        ],
+        "prod": [
+          "endernet-blog"
+        ]
+      }
+    }
+  }
+}

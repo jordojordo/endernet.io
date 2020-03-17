@@ -6,10 +6,10 @@
     "endernet-blog": {
       "hosting": {
         "dev": [
-          "dev-endernet-blog"
+          "dev-endernet-io"
         ],
         "prod": [
-          "endernet-blog"
+          "endernet-io"
         ]
       }
     }
